@@ -18,21 +18,24 @@
       padding: 10px;
       font-size: 24px;
     }
-    .video-container {
-      position: relative;
-      width: 100%;
-      padding-top: 56.25%; /* 16:9 Aspect Ratio */
-      background-color: black;
-      overflow: hidden;
-    }
-    .video-container video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+.video-container {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+  background-color: black; /* Background set to black */
+  overflow: hidden;
+}
+
+.video-container video {
+  position: absolute;
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  width: 100%;
+  height: auto; /* Maintain aspect ratio */
+  transform: translate(-50%, -50%);
+  background-color: black; /* Extra safety for black background */
+}
     #playPauseBtn, #muteUnmuteBtn, .timer-info, .timer-slider, #speedControl, .skip-buttons img, #downloadBtn, #shareBtn, #forwardImage, #backwardImage {
       position: absolute;
       z-index: 10;
@@ -42,8 +45,8 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 60px;
-      height: 60px;
+      width: 80px;
+      height: 80px;
     }
     #muteUnmuteBtn {
       top: 10px;
@@ -54,21 +57,21 @@
     #downloadBtn {
       top: 10px;
       right: 60px;
-      width: 40px;
-      height: 40px;
+      width: 50px;
+      height: 50px;
     }
     #shareBtn {
       top: 10px;
       right: 10px;
-      width: 40px;
-      height: 40px;
+      width: 50px;
+      height: 50px;
     }
     #speedControl {
       bottom: 50px;
       right: 10px;
       padding: 5px;
       font-size: 14px;
-      background-color: rgba(120, 0, 0, 0.7);
+      background-color: rgba(520, 0, 0, 0.5);
       color: white;
       border: none;
       border-radius: 5px;
@@ -114,17 +117,17 @@
     }
     #forwardImage, #backwardImage {
       display: none;
-      width: 60px;
-      height: 60px;
+      width: 70px;
+      height: 30px;
     }
     #forwardImage {
       top: 50%;
-      right: 20%;
+      right: 10%;
       transform: translateY(-50%);
     }
     #backwardImage {
       top: 50%;
-      left: 20%;
+      left: 10%;
       transform: translateY(-50%);
     }
         /* Fixed Video Container */
@@ -213,7 +216,7 @@
 
 <div class="video-container" id="videoContainer">
   <video id="videoPlayer">
-    <source src="1.mp4" type="video/mp4">
+    <source src="3.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
 
@@ -272,60 +275,7 @@
 <!-- Video Title -->
 <div class="video-title">उठो ठाकुरो जंग छिड़ गई__New Rajputana song 2022__New rajput status__New thakur status  </div>
 
-<!-- Add this loader div inside the video-container -->
-<div id="videoLoader" class="loader"></div>
 
-<style>
-  /* Loader Styles */
-  .loader {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 50px;
-    height: 50px;
-    border: 6px solid rgba(255, 255, 255, 0.3);
-    border-top-color: white;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    z-index: 15;
-    display: none; /* Hidden by default */
-  }
-
-  @keyframes spin {
-    0% {
-      transform: translate(-50%, -50%) rotate(0deg);
-    }
-    100% {
-      transform: translate(-50%, -50%) rotate(360deg);
-    }
-  }
-</style>
-
-<script>
-  const videoLoader = document.getElementById('videoLoader');
-
-  // Show loader when buffering
-  video.addEventListener('waiting', () => {
-    videoLoader.style.display = 'block';
-  });
-
-  // Hide loader when playing
-  video.addEventListener('playing', () => {
-    videoLoader.style.display = 'none';
-  });
-
-  // Handle video load error
-  video.addEventListener('error', () => {
-    alert('Unable to load the video. Please check your network or try again later.');
-    videoLoader.style.display = 'none';
-  });
-
-  // Hide loader on pause
-  video.addEventListener('pause', () => {
-    videoLoader.style.display = 'none';
-  });
-</script>
 <!-- Scrollable Image Grid -->
 <div class="image-grid">
   <!-- Image 2 -->
@@ -445,7 +395,7 @@ speedControl.addEventListener('change', () => {
     image.style.display = 'block';
     setTimeout(() => {
       image.style.display = 'none';
-    }, 1000);
+    }, 200);
   }
 
   // Toggle Controls on Video Click
@@ -471,10 +421,10 @@ speedControl.addEventListener('change', () => {
   // Download Video
   function downloadVideo() {
     const link = document.createElement('a');
-    link.href = '2.mp4'; // Video file
-    link.download = '2.mp4';
-    link.click();
-  }
+    link.href = '3.mp4'; // वीडियो फाइल का नाम और लोकेशन
+    link.download = '3.mp4'; // डाउनलोड के लिए फाइल का नाम सेट करें
+    link.click(); // डाउनलोड शुरू करें
+}
 
   // Share Video
   function shareVideo() {
